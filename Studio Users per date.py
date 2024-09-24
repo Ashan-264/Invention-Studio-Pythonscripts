@@ -16,8 +16,8 @@ data['End Date Time'] = pd.to_datetime(data['End Date Time'])
 data['User Hours'] = (data['End Date Time'] - data['Start Date Time']).dt.total_seconds() / 3600
 
 # Step 5: Filter the data to include only records from August 15th to December 15th and exclude weekends
-start_date = '2023-08-15'
-end_date = '2023-12-15'
+start_date = '2024-01-15'
+end_date = '2024-04-25'
 filtered_data = data[(data['Start Date Time'] >= start_date) & (data['Start Date Time'] <= end_date)]
 
 # Filter out weekends (5 = Saturday, 6 = Sunday)
@@ -32,11 +32,24 @@ plt.figure(figsize=(12, 6))
 plt.plot(daily_usage_hours['Date'], daily_usage_hours['User Hours'])  # Removed marker argument
 
 # Step 8: Customize the plot
-plt.title('Fall 2023 Total Studio User Hours by Day (Monday to Friday)')
+plt.title('Fall 2023 and Spring 2024 Total Studio User Hours by Day (Monday to Friday)')
 plt.xlabel('Date')
 plt.ylabel('Total User Hours')
 plt.xticks(rotation=45)  # Rotate the x-axis labels for better readability
 plt.grid(True)
+
+# Add vertical spans for the Fall 2023 time periods
+# plt.axvspan(pd.to_datetime('2023-10-16'), pd.to_datetime('2023-10-16') + pd.Timedelta(days=7), alpha=0.3, color='green')
+# plt.axvspan(pd.to_datetime('2023-10-30'), pd.to_datetime('2023-10-30') + pd.Timedelta(days=7), alpha=0.3, color='green')
+# plt.axvspan(pd.to_datetime('2023-11-10'), pd.to_datetime('2023-11-10') - pd.Timedelta(days=4), alpha=0.3, color='green')
+
+
+# Add vertical spans for the Spring 2110 time periods
+plt.axvspan(pd.to_datetime('2024-02-19'), pd.to_datetime('2024-02-19') + pd.Timedelta(days=7), alpha=0.3, color='green')
+plt.axvspan(pd.to_datetime('2024-03-04'), pd.to_datetime('2024-03-04') + pd.Timedelta(days=7), alpha=0.3, color='green')
+plt.axvspan(pd.to_datetime('2024-04-01'), pd.to_datetime('2024-04-01') + pd.Timedelta(days=7), alpha=0.3, color='green')
+plt.axvspan(pd.to_datetime('2024-04-12'), pd.to_datetime('2024-04-12') - pd.Timedelta(days=1), alpha=0.3, color='green')
+
 plt.tight_layout()
 
 # Step 9: Show the plot
